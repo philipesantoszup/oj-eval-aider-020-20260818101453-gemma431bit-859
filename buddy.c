@@ -121,7 +121,7 @@ void *alloc_pages(int rank) {
 }
 
 int return_pages(void *p) {
-    if (!base_addr || p < base_addr || p >= (char *)base_addr + (size_t)total_pages * PAGE_SIZE) {
+    if (!base_addr || (char *)p < (char *)base_addr || (char *)p >= (char *)base_addr + (size_t)total_pages * PAGE_SIZE) {
         return -EINVAL;
     }
     int idx = ((char *)p - (char *)base_addr) / PAGE_SIZE;
@@ -167,7 +167,7 @@ int return_pages(void *p) {
 }
 
 int query_ranks(void *p) {
-    if (!base_addr || p < base_addr || p >= (char *)base_addr + (size_t)total_pages * PAGE_SIZE) {
+    if (!base_addr || (char *)p < (char *)base_addr || (char *)p >= (char *)base_addr + (size_t)total_pages * PAGE_SIZE) {
         return -EINVAL;
     }
     int idx = ((char *)p - (char *)base_addr) / PAGE_SIZE;
